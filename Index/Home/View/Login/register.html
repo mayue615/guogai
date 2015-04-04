@@ -1,0 +1,51 @@
+<layout name="layout_blank" />
+<script language="javascript">
+$(document).ready(function(){
+$("#user_name").change(function() { //jquery 中change()函数 
+	var temp = $("#user_name").val()
+	$.get("__APP__/Home/Login/is_user_exist_ajax",{user_name:temp},function(data){
+		if(data==1)
+			$("#user_tip").text("user name has existed");
+		else
+			$("#user_tip").text("user name is valid");						
+   })
+});
+$("#repassword").change(function() { //jquery 中change()函数 
+	var temp1 = $("#password").val();
+	var temp2 = $("#repassword").val();
+	if(temp1!=temp2){
+		$("#password_tip").text("Passwords are not the same");	
+	}
+	else{
+		$("#password_tip").text("");	
+	}
+});	
+$("#password").change(function() { //jquery 中change()函数 
+	var temp1 = $("#password").val();
+	var temp2 = $("#repassword").val();
+	if(temp1!=temp2){
+		$("#password_tip").text("Passwords are not the same");	
+	}
+	else{
+		$("#password_tip").text("");	
+	}
+});	
+});
+</script>
+
+  <form class="form-signin" method="post" action="{:U('register_deal')}">
+	<h2 class="form-signin-heading">请注册</h2>
+	<input type="text" id="user_name" class="form-control" name="user_name" placeholder="用户名" required="" autofocus=""><p id="user_tip"></p>
+	<input type="password" id="password" class="form-control" name="password" placeholder="密码" required="">
+	<input type="password" id="repassword" class="form-control" name="repassword" placeholder="再次输入密码" required=""><p id="password_tip"></p>	
+	<input type="text" id="english_name" class="form-control" name="english_name" placeholder="英文名" required="">
+	<input type="text" id="chinese_name" class="form-control" name="chinese_name" placeholder="中文名">
+	<input type="text" id="email" class="form-control" name="email" placeholder="邮箱">	
+	<input type="text" id="phone" class="form-control" name="phone" placeholder="手机">	
+	<input type="text" id="birthday" class="form-control" name="birthday" placeholder="生日">	
+	<input type="text" id="province" class="form-control" name="province" placeholder="省份">
+	<input type="text" id="city" class="form-control" name="city" placeholder="城市">	
+	<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+	<h3><a href="{:U('Index/index')}">返回</a></h3>	
+  </form>
+

@@ -16,21 +16,6 @@ use Home\Logic\UserLogic;
 				return $this->get_user_info_by_id($user_id);
 			}
 		}
-		public function get_user_name_dictionary(){
-			$ds=$this->select();
-			$id2name_dict = array();
-			foreach($ds as $data){
-				$user_name = $data['user_name'];
-				$dis_name = $data['english_name'];
-				$id =  $data['Id'] ;
-				if ($dis_name==null){		
-					$dis_name = $user_name;		
-				}
-				$id2name_dict[$id] = $dis_name;
-				
-			}
-			return $id2name_dict;
-		}
 		public function get_user_name($user_id){
 			$condition['Id']=$user_id;
 			$result = $this->where($condition)->find();
@@ -42,11 +27,20 @@ use Home\Logic\UserLogic;
 			return $result['club'];			
 		}
 		public function get_user_info($user_id){
-			//$m=M('club_user');
-			//$result=$m->select($user_id);
 			$condition['Id']=$user_id;
 			$result = $this->relation(true)->where($condition)->find();
 			return $result;
+		}
+		public function get_users_info(){
+			$result = $this->relation(true)->select();
+			//dump($result);
+			return $result;
+		}		
+		public function set_user_photo($user_id,$photo){
+			$data['Id']=$user_id;
+			$data['photo']=$photo;
+			//dump($data);
+			$this->save($data);
 		}
 		public function set_user_club($club_id,$user_id,$is_active){
 			$data['user_id']=$user_id;

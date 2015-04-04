@@ -3,7 +3,14 @@ namespace Home\Model;
 use Think\Model\RelationModel;
 	class UserModel extends RelationModel{
 	protected $_link = array(	
-		
+		'photo' => array(
+		'mapping_type'      =>  self::HAS_ONE,
+		'class_name'        =>  'photo',//子表名称
+		'foreign_key'       =>  'user_id',
+		'mapping_order'       =>  'Id',
+		'as_fields'=>'photo:pic',
+		//'mapping_fields' => array('level,body,title'),//默认所有的字段都查询
+		),		
 	);
 	
 	
